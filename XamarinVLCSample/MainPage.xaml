@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:XamarinVLCSample;assembly=XamarinVLCSample" 
+             xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
+             x:Class="XamarinVLCSample.MainPage">
+    <ContentPage.Resources>
+        <Style x:Key="Wrapper" TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="#000000" />
+        </Style>
+        <Style x:Key="Tool" TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="#000000" />
+        </Style>
+        <Style x:Key="Time" TargetType="Label">
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="TextColor" Value="#AAAAAA" />
+        </Style>
+        <Style x:Key="PlaybackSlider" TargetType="local:PlaybackSlider">
+            <Setter Property="ElapsedColor" Value="#FFFFFF" />
+            <Setter Property="RemainingColor" Value="#AAAAAA" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid x:Name="Wrapper" Style="{StaticResource Key=Wrapper}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!-- VideoView -->
+        <vlc:VideoView x:Name="VideoView" Grid.Row="0" Grid.Column="0" />
+        <!-- Controller -->
+        <Grid x:Name="Button" Grid.Row="1" Grid.Column="0">
+            <Image x:Name="PlayImageButton">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnPlayImageButtonClicked"/>
+                </Image.GestureRecognizers>
+            </Image> 
+        </Grid>
+        <Grid x:Name="Tool" Grid.Row="2" Grid.Column="0" Style="{StaticResource Key=Tool}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="ElapsedTime" Grid.Column="0" Style="{StaticResource Key=Time}" Text="00:00" />
+            <local:PlaybackSlider x:Name="PlaybackSlider" Grid.Column="1" Style="{StaticResource Key=PlaybackSlider}" Minimum="0" Maximum="0.99" />
+            <Label x:Name="RemainingTime" Grid.Column="2" Style="{StaticResource Key=Time}" Text="00:00" />
+        </Grid>
+    </Grid>
+</ContentPage>
